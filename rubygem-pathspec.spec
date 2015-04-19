@@ -69,7 +69,7 @@ rspec -Ilib spec
 %exclude %{gem_cache}
 
 %files doc
-%{doc} %{gem_docdir}
+%doc %{gem_docdir}
 
 %changelog
 * Fri Apr 10 2015 Orion Poplawski <orion@cora.nwra.com> - 0.0.2-2
