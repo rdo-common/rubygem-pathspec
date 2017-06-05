@@ -2,7 +2,7 @@
 
 Name:           rubygem-%{gem_name}
 Version:        0.1.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Use to match path patterns such as gitignore
 
 License:        ASL 2.0
@@ -28,18 +28,8 @@ Documentaion for %{name}
 
 %prep
 gem unpack %{SOURCE0}
-%setup -q -D -T -n %{gem_name}-%{version} -a 1
+%setup -q -D -T -n %{gem_name}-%{version}
 gem spec %{SOURCE0} -l --ruby > %{gem_name}.gemspec
-
-%if 0%{fedora} < 22
-  # Fedora 21 has Rspec 2.x, and Fedora 22 has Rspec 3.x.
-  # Switch to the older Rspec functions.
-  for f in $(find spec -type f); do
-    sed -i $f \
-      -e "s/is_expected\.to/should/g" \
-      -e "s/is_expected\.not_to/should_not/g"
-  done
-%endif
 
 
 %build
@@ -53,6 +43,7 @@ cp -a ./%{gem_dir}/* %{buildroot}%{gem_dir}/
 
 
 %check
+echo > spec/spec_helper.rb
 rspec -Ilib spec
 
 
@@ -67,10 +58,16 @@ rspec -Ilib spec
 
 %files doc
 %doc %{gem_docdir}
+%{gem_instdir}/spec
 
 %changelog
+* Mon Jun 05 2017 Athos Ribeiro <athoscr@fedoraproject.org> - 0.1.0-3
+- Do not use simplecov
+- Add spec directory to documentation subpackage
+- Remove code for EOL fedora versions
+
 * Mon Jun 05 2017 Athos Ribeiro <athoscr@fedoraproject.org> - 0.1.0-2
-- Remove unused Source1
+- Remove unused Source
 
 * Mon Jun 05 2017 Athos Ribeiro <athoscr@fedoraproject.org> - 0.1.0-1
 - New version
