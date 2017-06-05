@@ -2,15 +2,12 @@
 
 Name:           rubygem-%{gem_name}
 Version:        0.1.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Use to match path patterns such as gitignore
 
 License:        ASL 2.0
 URL:            https://rubygems.org/gems/%{gem_name}
 Source0:        https://rubygems.org/downloads/%{gem_name}-%{version}.gem
-# svn export https://github.com/highb/pathspec-ruby/tags/0.0.2/spec spec
-# tar caf spec-0.0.2.tar.xz spec
-Source1:        spec-%{version}.tar.xz
 BuildArch:      noarch
 
 BuildRequires:  rubygems-devel
@@ -72,6 +69,9 @@ rspec -Ilib spec
 %doc %{gem_docdir}
 
 %changelog
+* Mon Jun 05 2017 Athos Ribeiro <athoscr@fedoraproject.org> - 0.1.0-2
+- Remove unused Source1
+
 * Mon Jun 05 2017 Athos Ribeiro <athoscr@fedoraproject.org> - 0.1.0-1
 - New version
 
