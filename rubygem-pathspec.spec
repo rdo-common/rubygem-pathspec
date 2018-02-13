@@ -2,7 +2,7 @@
 
 Name:           rubygem-%{gem_name}
 Version:        0.2.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Use to match path patterns such as gitignore
 
 License:        ASL 2.0
@@ -39,8 +39,10 @@ gem build %{gem_name}.gemspec
 
 %install
 mkdir -p %{buildroot}%{gem_dir}
+mkdir -p %{buildroot}%{_bindir}
 cp -a ./%{gem_dir}/* %{buildroot}%{gem_dir}/
-
+chmod 0755 %{buildroot}%{gem_instdir}/bin/pathspec-rb
+mv %{buildroot}%{gem_instdir}/bin/pathspec-rb %{buildroot}%{_bindir}
 
 %check
 echo > spec/spec_helper.rb
@@ -54,6 +56,7 @@ rspec -Ilib spec
 %doc %{gem_instdir}/README.md
 %{gem_libdir}
 %{gem_spec}
+%{_bindir}/pathspec-rb
 %exclude %{gem_cache}
 
 %files doc
@@ -61,6 +64,10 @@ rspec -Ilib spec
 %{gem_instdir}/spec
 
 %changelog
+* Tue Feb 13 2018 Athos Ribeiro <athoscr@fedoraproject.org> - 0.2.1-2
+- Bump release
+- Ship new binary file
+
 * Tue Feb 13 2018 Athos Ribeiro <athoscr@fedoraproject.org> - 0.2.1-1
 - Update version
 
