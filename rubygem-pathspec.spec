@@ -2,7 +2,7 @@
 
 Name:           rubygem-%{gem_name}
 Version:        0.2.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Use to match path patterns such as gitignore
 
 License:        ASL 2.0
@@ -64,6 +64,9 @@ rspec -Ilib spec
 %{gem_instdir}/spec
 
 %changelog
+* Sat Jul 14 2018 Fedora Release Engineering <releng@fedoraproject.org> - 0.2.1-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
+
 * Tue Feb 13 2018 Athos Ribeiro <athoscr@fedoraproject.org> - 0.2.1-2
 - Bump release
 - Ship new binary file
